@@ -2,189 +2,189 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Mail } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Home",     href: "#home" },
-  { label: "About",   href: "#about" },
-  { label: "Skills",  href: "#skills" },
-  { label: "Projects",href: "#projects" },
-  { label: "Journey", href: "#journey" },
-  { label: "Contact", href: "#contact" },
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "journey", label: "Journey" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled]       = useState(false);
-  const [menuOpen, setMenuOpen]       = useState(false);
-  const [active, setActive]           = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
-  /* ── scroll shadow ── */
+  // Scroll shadow trigger
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 24);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ── active section via IntersectionObserver ── */
+  // Sync scroll lock with menuOpen
   useEffect(() => {
-    const ids = NAV_LINKS.map(l => l.href.slice(1));
-    const obs = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Active section tracker via IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
       },
-      { rootMargin: "-40% 0px -55% 0px" }
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
     );
-    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
-    return () => obs.disconnect();
+
+    NAV_LINKS.forEach((link) => {
+      const el = document.getElementById(link.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
-  const scrollTo = (href: string) => {
+  const handleNavClick = (id: string) => {
     setMenuOpen(false);
-    document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <>
-      {/* ── Pill navbar ── */}
-      <motion.header
-        initial={{ y: -70, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
-        className="fixed top-5 left-1/2 -translate-x-1/2 z-50"
-      >
-        <div
-          className="flex items-center gap-0.5 px-2 py-2 rounded-full"
-          style={{
-            background : scrolled ? "rgba(8,8,14,0.92)" : "rgba(8,8,14,0.70)",
-            border     : `1px solid ${scrolled ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.08)"}`,
-            backdropFilter : "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            boxShadow  : scrolled ? "0 4px 24px rgba(0,0,0,0.5)" : "none",
-            transition : "background 0.3s, border 0.3s, box-shadow 0.3s",
-          }}
-        >
-          {/* Logo */}
-          <button
-            onClick={() => scrollTo("#home")}
-            className="flex items-center justify-center w-9 h-9 rounded-full mr-1 font-bold text-sm shrink-0"
-            style={{
-              background: "linear-gradient(135deg, #00d4ff 0%, #a855f7 100%)",
-              color: "#fff",
-              fontFamily: "'JetBrains Mono', monospace",
-              letterSpacing: "0.02em",
-            }}
+      <header className="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <nav
+            className={`mt-3 flex items-center justify-between rounded-2xl px-3 py-2.5 transition-all duration-300 sm:px-4 ${
+              scrolled ? "glass" : "border border-transparent"
+            }`}
           >
-            SB
-          </button>
-
-          {/* Separator */}
-          <div className="w-px h-4 mx-1 hidden md:block" style={{ background: "rgba(255,255,255,0.12)" }} />
-
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-0.5">
-            {NAV_LINKS.map(link => {
-              const isActive = active === link.href.slice(1);
-              return (
-                <button
-                  key={link.href}
-                  onClick={() => scrollTo(link.href)}
-                  className="relative px-3.5 py-2 rounded-full text-sm font-medium transition-colors duration-200"
+            {/* Logo brand */}
+            <button
+              onClick={() => handleNavClick("home")}
+              className="flex items-center gap-3 cursor-pointer text-left"
+              aria-label="Go to home"
+            >
+              <span className="relative grid h-10 w-10 place-items-center rounded-xl bg-base">
+                <span
+                  className="absolute inset-0 rounded-xl p-[1.5px]"
                   style={{
-                    color      : isActive ? "#ffffff" : "rgba(255,255,255,0.50)",
-                    background : isActive ? "rgba(0,212,255,0.12)" : "transparent",
-                    fontFamily : "'Inter', sans-serif",
+                    background: "linear-gradient(135deg, #67e8f9, #22d3ee, #2dd4bf)",
+                    WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
                   }}
+                />
+                <span className="display text-lg text-accent-gradient font-bold">SB</span>
+              </span>
+              <span className="hidden leading-tight sm:block select-none">
+                <span className="block text-sm font-semibold text-ink">Shuvashis Basak</span>
+                <span className="block text-[0.7rem] text-muted">MERN · AI · Systems</span>
+              </span>
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden items-center gap-1 lg:flex">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => handleNavClick(link.id)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
+                    activeSection === link.id
+                      ? "text-accent bg-accent/10"
+                      : "text-muted hover:text-ink"
+                  }`}
                 >
-                  {isActive && (
-                    <span
-                      className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
-                      style={{ background: "#00d4ff" }}
-                    />
-                  )}
                   {link.label}
                 </button>
-              );
-            })}
-          </div>
+              ))}
+            </div>
 
-          {/* Separator */}
-          <div className="w-px h-4 mx-1 hidden md:block" style={{ background: "rgba(255,255,255,0.12)" }} />
+            {/* Right CTAs */}
+            <div className="hidden items-center gap-3 lg:flex">
+              <a
+                href="mailto:basakshuvashis@gmail.com"
+                className="btn-ghost py-2 px-4 text-xs font-semibold flex items-center gap-2"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                Let&apos;s talk
+              </a>
+            </div>
 
-          {/* Hire me pill */}
-          <a
-            href="mailto:basakshuvashis@gmail.com"
-            className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold ml-1 transition-opacity duration-200 hover:opacity-90"
-            style={{
-              background: "linear-gradient(135deg, #00d4ff, #00b4d8)",
-              color: "#0a0a0f",
-              fontFamily: "'Inter', sans-serif",
-            }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0a0a0f] opacity-50" />
-            Hire Me
-          </a>
-
-          {/* Hamburger – mobile */}
-          <button
-            onClick={() => setMenuOpen(o => !o)}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 ml-1 rounded-full"
-            style={{ color: "rgba(255,255,255,0.7)" }}
-            aria-label="Menu"
-          >
-            <span
-              className="block w-5 h-px rounded-full bg-current transition-all duration-200"
-              style={{ transform: menuOpen ? "rotate(45deg) translateY(3px)" : "none" }}
-            />
-            <span
-              className="block w-5 h-px rounded-full bg-current transition-all duration-200"
-              style={{ opacity: menuOpen ? 0 : 1 }}
-            />
-            <span
-              className="block w-5 h-px rounded-full bg-current transition-all duration-200"
-              style={{ transform: menuOpen ? "rotate(-45deg) translateY(-3px)" : "none" }}
-            />
-          </button>
+            {/* Mobile burger button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/5 lg:hidden cursor-pointer"
+              aria-label="Toggle menu"
+            >
+              <span
+                className={`block h-px w-5 rounded-full bg-ink transition-transform duration-300 ${
+                  menuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block h-px w-5 rounded-full bg-ink transition-all duration-200 ${
+                  menuOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`block h-px w-5 rounded-full bg-ink transition-transform duration-300 ${
+                  menuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </button>
+          </nav>
         </div>
-      </motion.header>
+      </header>
 
-      {/* ── Mobile drawer ── */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0,  scale: 1 }}
-            exit  ={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.18 }}
-            className="fixed left-4 right-4 top-20 z-40 md:hidden rounded-2xl p-3"
-            style={{
-              background: "rgba(8,8,14,0.96)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              backdropFilter: "blur(20px)",
-            }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-x-0 top-16 z-40 mx-auto max-w-6xl px-4 sm:px-6 lg:hidden"
           >
-            {NAV_LINKS.map((link, i) => (
-              <motion.button
-                key={link.href}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.04 }}
-                onClick={() => scrollTo(link.href)}
-                className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150"
-                style={{
-                  color      : active === link.href.slice(1) ? "#00d4ff" : "rgba(255,255,255,0.65)",
-                  background : active === link.href.slice(1) ? "rgba(0,212,255,0.08)" : "transparent",
-                  fontFamily : "'Inter', sans-serif",
-                }}
-              >
-                {link.label}
-              </motion.button>
-            ))}
-            <div className="mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+            <div className="glass rounded-2xl p-3 flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => handleNavClick(link.id)}
+                  className={`block w-full rounded-xl px-4 py-3 text-left text-base font-medium transition-colors cursor-pointer ${
+                    activeSection === link.id
+                      ? "text-accent bg-accent/10"
+                      : "text-muted hover:bg-white/5 hover:text-ink"
+                  }`}
+                >
+                  {link.label}
+                </button>
+              ))}
               <a
                 href="mailto:basakshuvashis@gmail.com"
-                className="flex items-center justify-center w-full py-3 rounded-xl text-sm font-semibold"
-                style={{ background: "linear-gradient(135deg, #00d4ff, #00b4d8)", color: "#0a0a0f" }}
+                className="btn-primary mt-2 w-full justify-center text-center font-semibold"
               >
-                Hire Me →
+                Let&apos;s talk
               </a>
             </div>
           </motion.div>

@@ -1,158 +1,124 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+import { Code2, Brain, Cpu } from "lucide-react";
+import Image from "next/image";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const STATS = [
-  { value: 11, suffix: "+", label: "Projects Built" },
-  { value: 5, suffix: "+", label: "Technologies Mastered" },
-  { value: 3.61, suffix: "", label: "GPA at BRAC University", isDecimal: true },
-  { value: 2, suffix: "+", label: "Years of Active Building" },
+const SERVICES = [
+  {
+    title: "Full-Stack Web Apps",
+    desc: "End-to-end MERN applications — from responsive React/Next.js interfaces to secure REST APIs and MongoDB data models.",
+    icon: Code2,
+  },
+  {
+    title: "Applied AI & ML",
+    desc: "Deep learning MRI classification (ResNet18) and segmentation (U-Net, Attention U-Net) in PyTorch + computer vision.",
+    icon: Brain,
+  },
+  {
+    title: "Systems Programming",
+    desc: "Low-level filesystems in C on Linux featuring binary disk layouts, CRC32 verification, and disk allocations.",
+    icon: Cpu,
+  },
 ];
 
-function StatCounter({ value, suffix, label, isDecimal }: { value: number; suffix: string; label: string; isDecimal?: boolean }) {
-  const numRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const el = numRef.current;
-    if (!el) return;
-
-    const obj = { val: 0 };
-    gsap.to(obj, {
-      val: value,
-      duration: 1.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        once: true,
-      },
-      onUpdate: () => {
-        el.textContent = isDecimal ? obj.val.toFixed(2) : Math.round(obj.val).toString();
-      },
-      onComplete: () => {
-        el.textContent = isDecimal ? value.toFixed(2) : value.toString();
-      },
-    });
-  }, [value, isDecimal]);
-
-  return (
-    <div className="flex flex-col items-start gap-1">
-      <div className="flex items-baseline gap-0.5">
-        <span
-          ref={numRef}
-          className="font-extrabold leading-none"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", color: "#00d4ff" }}
-        >
-          0
-        </span>
-        {suffix && (
-          <span className="font-bold text-2xl" style={{ color: "#00d4ff" }}>{suffix}</span>
-        )}
-      </div>
-      <span className="text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>{label}</span>
-    </div>
-  );
-}
+const FACTS = [
+  { label: "Based in", value: "Dhaka, BD" },
+  { label: "Focus", value: "MERN · AI · Systems" },
+  { label: "Studying", value: "CS @ BRAC" },
+  { label: "Projects", value: "13+ shipped" },
+];
 
 export function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".about-text-block",
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-text-block",
-            start: "top 85%",
-            once: true,
-          },
-        }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="about" ref={sectionRef} className="relative py-28 lg:py-36">
-      {/* Subtle glow */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)", filter: "blur(100px)" }} />
+    <section id="about" className="relative px-4 py-24 sm:px-6 overflow-hidden">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-12 lg:grid-cols-12 items-start">
+          
+          {/* ── LEFT: PHOTO CARD & QUICK FACTS ── */}
+          <div className="lg:col-span-5 relative">
+            {/* Ambient Glow */}
+            <div
+              className="absolute -inset-4 -z-10 rounded-[2.5rem] opacity-60 blur-2xl pointer-events-none"
+              style={{
+                background: "radial-gradient(circle at 50% 40%, rgba(34,211,238,0.15), transparent 60%)",
+              }}
+            />
 
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Section label */}
-        <p className="text-xs font-mono tracking-[0.15em] uppercase mb-4" style={{ color: "#00d4ff" }}>
-          // About Me
-        </p>
+            {/* Photo Card */}
+            <div className="glass rounded-[2rem] p-3">
+              <div className="overflow-hidden rounded-[1.5rem] relative aspect-[4/5] w-full bg-base">
+                <Image
+                  src="/shuvashis.jpg"
+                  alt="Shuvashis Basak"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 400px"
+                />
+              </div>
+            </div>
 
-        {/* Heading */}
-        <h2 className="text-4xl lg:text-5xl font-bold mb-16 max-w-2xl leading-tight" style={{ color: "rgba(255,255,255,0.95)" }}>
-          A developer who loves both the craft of code{" "}
-          <span style={{ background: "linear-gradient(135deg, #00d4ff, #a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            and the art of design.
-          </span>
-        </h2>
-
-        {/* Two columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-          {/* LEFT — Stats 2×2 */}
-          <div className="lg:col-span-2 grid grid-cols-2 gap-8">
-            {STATS.map((s) => (
-              <StatCounter key={s.label} {...s} />
-            ))}
-          </div>
-
-          {/* RIGHT — Text */}
-          <div className="about-text-block lg:col-span-3 flex flex-col gap-6">
-            <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-              I&apos;m Shuvashis Basak — a Computer Science student at BRAC University, Dhaka,
-              graduating in 2026 with a 3.61 GPA. I started coding because I wanted to build
-              things that people actually use. That curiosity turned into a passion spanning
-              full-stack web development, systems programming, machine learning, and frontend
-              animation engineering.
-            </p>
-            <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-              What drives me isn&apos;t just writing code that works — it&apos;s writing code that&apos;s
-              clean, scalable, and paired with interfaces that feel alive. I&apos;ve built a
-              healthcare platform, a job portal with smart matching algorithms, a booking
-              system, a working filesystem in C, a deep learning brain tumor detector, and a
-              Pac-Man game in OpenGL. Each project pushed me further.
-            </p>
-            <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
-              Outside of coding, I write technical articles on Hashnode, earned the Duke of
-              Edinburgh Award, and was recognised through the global Aspire Leaders Program
-              alongside participants from 180+ countries. I&apos;m always learning, always building.
-            </p>
-
-            {/* Highlight cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-              {[
-                { icon: "🎓", text: "BRAC University · BSc CSE · 2022–2026 · GPA 3.61" },
-                { icon: "🌐", text: "Open to full-time roles, internships & freelance projects" },
-              ].map((card, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-3 p-4 rounded-xl"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                  }}
-                >
-                  <span className="text-xl mt-0.5">{card.icon}</span>
-                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>{card.text}</p>
+            {/* Quick Facts Grid */}
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              {FACTS.map((fact) => (
+                <div key={fact.label} className="glass-soft rounded-2xl px-4 py-3 select-none">
+                  <div className="text-[0.7rem] uppercase tracking-wide text-faint font-semibold">
+                    {fact.label}
+                  </div>
+                  <div className="mt-0.5 font-semibold text-ink text-sm sm:text-base">
+                    {fact.value}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* ── RIGHT: PARAGRAPHS & WHAT I DO ── */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            
+            {/* Eyebrow Label */}
+            <span className="section-eyebrow">// About Me</span>
+
+            {/* Main bio text blocks */}
+            <div className="space-y-5 text-base sm:text-[1.05rem] leading-relaxed text-muted">
+              <p>
+                My journey into code started with a simple question every builder asks —{" "}
+                <span className="text-ink font-medium">&quot;how does this actually work?&quot;</span> That curiosity pulled me from breaking apart small programs to architecting full-stack applications, and eventually into deep learning and systems engineering.
+              </p>
+              <p>
+                Today I&apos;m a Computer Science student at{" "}
+                <span className="text-ink font-medium">BRAC University</span> (graduating 2026, GPA 3.61). I love the full arc of building software: crafting clean React frontends, designing secure Express backends with MongoDB, training PyTorch neural networks for medical imaging, or writing low-level file systems in C.
+              </p>
+              <p>
+                What excites me most is coding projects that bridge complex algorithms with polished, real-world utility. Outside of coding, I write technical articles on Hashnode, earned the Duke of Edinburgh Award, and was selected for the global Aspire Leaders Program alongside peers from 180+ countries.
+              </p>
+            </div>
+
+            {/* What I do Heading */}
+            <h3 className="mt-8 text-sm font-semibold uppercase tracking-wider text-faint">
+              What I do
+            </h3>
+
+            {/* Services Grid */}
+            <div className="grid gap-4 sm:grid-cols-3">
+              {SERVICES.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <div key={s.title} className="card-hover glass h-full rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                      <span className="grid h-11 w-11 place-items-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <h4 className="mt-4 font-semibold text-ink text-sm sm:text-base">{s.title}</h4>
+                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">{s.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+
         </div>
       </div>
     </section>

@@ -8,6 +8,7 @@ export interface Project {
   liveUrl?: string;
   category: string;
   gradient: string;
+  screenshot?: string;
   featured?: boolean;
   featuredIndex?: number;
 }
@@ -24,6 +25,7 @@ export const featuredProjects: Project[] = [
     githubUrl: "https://github.com/SHUVASHIS01/MediQueue-Tutor-Booking-System_client",
     category: "Full Stack · MERN",
     gradient: "from-cyan-400 to-teal-500",
+    screenshot: "/mediqueue.png",
     featured: true,
     featuredIndex: 0,
   },
@@ -38,6 +40,7 @@ export const featuredProjects: Project[] = [
     githubUrl: "https://github.com/SHUVASHIS01/CSE471_Project",
     category: "Full Stack · MERN",
     gradient: "from-purple-500 to-pink-500",
+    screenshot: "/jobportal.png",
     featured: true,
     featuredIndex: 1,
   },
@@ -52,6 +55,7 @@ export const featuredProjects: Project[] = [
     githubUrl: "https://github.com/SHUVASHIS01/Frontend-for-DeveloperLook",
     category: "Frontend",
     gradient: "from-emerald-400 to-cyan-500",
+    screenshot: "/developerlook.png",
     featured: true,
     featuredIndex: 2,
   },
@@ -65,6 +69,7 @@ export const gridProjects: Project[] = [
       "A digital library platform (Mango Books) with category browsing, borrow/return lifecycle, Google OAuth, animated banners, and a user dashboard.",
     techStack: ["React", "Node.js", "MongoDB", "BetterAuth", "Tailwind CSS", "Swiper"],
     githubUrl: "https://github.com/SHUVASHIS01/book-borrowing-platform",
+    liveUrl: "https://mango-books.vercel.app/",
     category: "Full Stack",
     gradient: "from-orange-400 to-amber-500",
   },

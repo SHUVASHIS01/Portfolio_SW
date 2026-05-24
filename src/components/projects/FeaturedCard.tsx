@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import Image from "next/image";
 import { Project } from "@/data/projects";
 
 const GRADIENTS: Record<string, string> = {
@@ -21,8 +22,8 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
   const isEven = index % 2 === 0;
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [4, -4]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-6, 6]);
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [6, -6]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-8, 8]);
   const spotX = useMotionValue(0);
   const spotY = useMotionValue(0);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -44,52 +45,42 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
   const gradient = GRADIENTS[project.id] || "linear-gradient(135deg, #00d4ff, #a855f7)";
 
   const TextSide = (
-    <div className="flex flex-col justify-center gap-6 py-2">
-      {/* Number */}
+    <div className="flex flex-col gap-5 py-2">
+      {/* Index Number */}
       <div className="relative">
-        <span
-          className="absolute -top-8 -left-2 font-bold select-none pointer-events-none"
-          style={{ fontSize: 80, color: "rgba(255,255,255,0.06)", lineHeight: 1 }}
-        >
+        <span className="absolute -top-8 -left-2 display font-extrabold select-none pointer-events-none text-faint opacity-[0.06] text-7xl sm:text-8xl">
           {num}
         </span>
-        <h3 className="relative text-2xl lg:text-3xl font-bold z-10" style={{ color: "rgba(255,255,255,0.95)" }}>
+        <span className="chip mb-2 text-xs">{project.category}</span>
+        <h3 className="relative text-2xl sm:text-3xl font-bold z-10 text-ink leading-tight">
           {project.name}
         </h3>
       </div>
 
-      <p className="text-sm lg:text-base leading-relaxed max-w-lg" style={{ color: "rgba(255,255,255,0.6)" }}>
+      {/* Description */}
+      <p className="text-sm sm:text-base leading-relaxed text-muted max-w-lg">
         {project.description}
       </p>
 
       {/* Tech chips */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {project.techStack.map((t) => (
-          <span
-            key={t}
-            className="px-2.5 py-1 rounded-full text-xs"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.65)",
-            }}
-          >
+          <span key={t} className="chip text-[0.7rem] px-2.5 py-1">
             {t}
           </span>
         ))}
       </div>
 
-      {/* Buttons */}
-      <div className="flex gap-3">
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-3 mt-2">
         {project.liveUrl && (
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-[#0a0a0f] transition-all duration-200 hover:scale-105"
-            style={{ background: "linear-gradient(135deg, #00d4ff, #00b4d8)", boxShadow: "0 0 20px rgba(0,212,255,0.3)" }}
+            className="btn-primary py-2 px-4 text-xs font-semibold flex items-center gap-1.5"
           >
-            <ExternalLink size={14} />
+            <ExternalLink className="h-3.5 w-3.5" />
             Live Demo
           </a>
         )}
@@ -97,14 +88,9 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105"
-          style={{
-            color: "rgba(255,255,255,0.8)",
-            background: "rgba(255,255,255,0.05)",
-            border: "1px solid rgba(255,255,255,0.12)",
-          }}
+          className="btn-ghost py-2 px-4 text-xs font-semibold flex items-center gap-1.5"
         >
-          <FaGithub size={14} />
+          <FaGithub className="h-3.5 w-3.5" />
           GitHub
         </a>
       </div>
@@ -116,46 +102,64 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
       style={{ rotateX, rotateY, perspective: 1000, transformStyle: "preserve-3d", willChange: "transform" }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative rounded-2xl overflow-hidden cursor-none"
+      className="relative rounded-[1.8rem] overflow-hidden cursor-none group"
     >
-      {/* Browser mockup */}
+      {/* Mock Browser Frame */}
       <div
-        className="rounded-2xl overflow-hidden"
-        style={{ border: "1px solid rgba(255,255,255,0.1)", background: "#1a1a2e" }}
+        className="rounded-[1.8rem] overflow-hidden border border-white/10"
+        style={{ background: "rgba(18,28,30,0.6)", backdropFilter: "blur(8px)" }}
       >
-        {/* Chrome bar */}
+        {/* Mock Browser Tab Bar */}
         <div
-          className="flex items-center gap-2 px-4 py-3"
+          className="flex items-center gap-1.5 px-4 py-3"
           style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.03)" }}
         >
-          <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/50" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/50" />
           <div
-            className="flex-1 mx-3 rounded-md px-3 py-1 text-xs text-center"
-            style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}
+            className="flex-1 mx-4 rounded-md px-3 py-1.5 text-[10px] text-center select-none text-faint"
+            style={{ background: "rgba(255,255,255,0.05)", fontFamily: "var(--font-mono)" }}
           >
             {project.name.toLowerCase().replace(/\s+/g, "-")}.vercel.app
           </div>
         </div>
 
-        {/* Gradient screen */}
-        <div
-          className="h-56 lg:h-72 w-full flex items-center justify-center relative overflow-hidden"
-          style={{ background: gradient }}
-        >
-          {/* Animated pattern */}
-          <div className="absolute inset-0 opacity-10"
-            style={{ backgroundImage: "radial-gradient(circle at 30% 50%, rgba(255,255,255,0.4) 1px, transparent 1px), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.3) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-          <span className="text-white/30 font-bold text-3xl tracking-wider select-none">{project.name}</span>
+        {/* Screenshot / Visual Viewport */}
+        <div className="h-60 sm:h-72 lg:h-80 w-full relative overflow-hidden flex items-center justify-center">
+          {project.screenshot ? (
+            <Image
+              src={project.screenshot}
+              alt={project.name}
+              fill
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+              sizes="(max-width: 1024px) 100vw, 550px"
+              priority
+            />
+          ) : (
+            // Fallback colorful grid pattern screen
+            <div className="absolute inset-0 flex items-center justify-center" style={{ background: gradient }}>
+              <div
+                className="absolute inset-0 opacity-15"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 30% 50%, rgba(255,255,255,0.4) 1px, transparent 1px), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.3) 1px, transparent 1px)",
+                  backgroundSize: "40px 40px",
+                }}
+              />
+              <span className="text-white/30 font-bold text-2xl sm:text-3xl tracking-wider select-none">
+                {project.name}
+              </span>
+            </div>
+          )}
 
-          {/* Spotlight */}
+          {/* Mouse hover spotlight */}
           <motion.div
             className="absolute inset-0 pointer-events-none"
             style={{
               background: useTransform(
                 [spotX, spotY],
-                ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.12), transparent 60%)`
+                ([x, y]) => `radial-gradient(350px circle at ${x}px ${y}px, rgba(255,255,255,0.1), transparent 60%)`
               ),
             }}
           />
@@ -166,23 +170,22 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       ref={cardRef}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 items-center"
-      style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+      className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 py-12 items-center border-b border-white/5"
     >
       {isEven ? (
         <>
-          <div>{TextSide}</div>
-          <div>{VisualSide}</div>
+          <div className="order-2 lg:order-1">{TextSide}</div>
+          <div className="order-1 lg:order-2">{VisualSide}</div>
         </>
       ) : (
         <>
-          <div className="order-2 lg:order-1">{VisualSide}</div>
-          <div className="order-1 lg:order-2">{TextSide}</div>
+          <div className="order-2">{VisualSide}</div>
+          <div className="order-1">{TextSide}</div>
         </>
       )}
     </motion.div>

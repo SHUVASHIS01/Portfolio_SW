@@ -6,47 +6,62 @@ import { GridCard } from "@/components/projects/GridCard";
 
 export function Projects() {
   return (
-    <section id="projects" className="relative py-28 lg:py-36">
+    <section id="projects" className="px-4 py-24 sm:px-6 relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-[800px] h-96 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(168,85,247,0.04) 0%, transparent 70%)", filter: "blur(100px)" }} />
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "20%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 700,
+          height: 400,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(34,211,238,0.03) 0%, transparent 70%)",
+          filter: "blur(80px)",
+        }}
+      />
 
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Label */}
-        <p className="text-xs font-mono tracking-[0.15em] uppercase mb-4" style={{ color: "#00d4ff" }}>
-          // Featured Work
-        </p>
+      <div className="mx-auto max-w-6xl w-full relative z-10">
+        
+        {/* Header */}
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+          <div className="max-w-xl">
+            <span className="section-eyebrow">// Featured Work</span>
+            <h2 className="text-4xl lg:text-5xl font-bold mt-4 text-ink display italic">
+              Projects that ship
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              From full-stack web applications to machine learning MRI pipelines and low-level systems programming.
+            </p>
+          </div>
+          <span className="chip">
+            {featuredProjects.length + gridProjects.length} projects total
+          </span>
+        </div>
 
-        {/* Heading */}
-        <h2 className="text-4xl lg:text-5xl font-bold mb-4" style={{ color: "rgba(255,255,255,0.95)" }}>
-          Projects that ship.
-        </h2>
-
-        <p className="text-base max-w-xl mb-0" style={{ color: "rgba(255,255,255,0.45)" }}>
-          From full-stack MERN apps to deep learning pipelines and systems programming — real projects solving real problems.
-        </p>
-
-        {/* ── Featured cards ── */}
-        <div className="mt-8">
+        {/* Featured Projects List */}
+        <div className="flex flex-col gap-4">
           {featuredProjects.map((project, i) => (
             <FeaturedCard key={project.id} project={project} index={i} />
           ))}
         </div>
 
-        {/* ── Grid section heading ── */}
-        <div className="mt-20 mb-8">
-          <p className="text-sm font-mono mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>
-            More projects →
-          </p>
-          <div className="h-px w-full" style={{ background: "rgba(255,255,255,0.06)" }} />
+        {/* Grid Title */}
+        <div className="mt-24 mb-10">
+          <span className="text-xs uppercase tracking-widest text-faint font-semibold font-mono flex items-center gap-3">
+            More projects
+            <span className="h-px flex-1 bg-white/10" />
+          </span>
         </div>
 
-        {/* ── Grid cards ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Grid Projects Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {gridProjects.map((project, i) => (
             <GridCard key={project.id} project={project} index={i} />
           ))}
         </div>
+
       </div>
     </section>
   );

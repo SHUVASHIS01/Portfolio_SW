@@ -1,143 +1,163 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+import {
+  Code2,
+  Server,
+  Database,
+  Terminal,
+  Brain,
+  Rocket,
+} from "lucide-react";
+import {
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaGitAlt,
+  FaGithub,
+} from "react-icons/fa";
+import {
+  SiTypescript,
+  SiMongodb,
+  SiPytorch,
+  SiTailwindcss,
+  SiPostman,
+} from "react-icons/si";
 import { skillCategories } from "@/data/skills";
 
-gsap.registerPlugin(ScrollTrigger);
+// Icons mapping for category cards
+const CATEGORY_ICONS: Record<string, any> = {
+  frontend: Code2,
+  backend: Server,
+  database: Database,
+  languages: Terminal,
+  "ai-ml": Brain,
+  tools: Rocket,
+};
 
-function SkillCard({ category, index }: { category: typeof skillCategories[0]; index: number }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-0.5, 0.5], [6, -6]);
-  const rotateY = useTransform(x, [-0.5, 0.5], [-10, 10]);
+// Skill items for infinite marquee
+const MARQUEE_SKILLS = [
+  { name: "React", Icon: FaReact, color: "#61dafb" },
+  { name: "Node.js", Icon: FaNodeJs, color: "#339933" },
+  { name: "MongoDB", Icon: SiMongodb, color: "#47a248" },
+  { name: "Python", Icon: FaPython, color: "#3776ab" },
+  { name: "PyTorch", Icon: SiPytorch, color: "#ee4c2c" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178c6" },
+  { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06b6d4" },
+  { name: "GitHub", Icon: FaGithub, color: "#ffffff" },
+  { name: "Git", Icon: FaGitAlt, color: "#f05032" },
+  { name: "Postman", Icon: SiPostman, color: "#ff6c37" },
+];
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const nx = (e.clientX - rect.left) / rect.width - 0.5;
-    const ny = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(nx);
-    y.set(ny);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+function SkillsMarquee() {
+  // Duplicate array to enable seamless looping
+  const doubledSkills = [...MARQUEE_SKILLS, ...MARQUEE_SKILLS, ...MARQUEE_SKILLS];
 
   return (
-    <motion.div
-      className="skill-card rounded-2xl p-5 flex flex-col gap-4"
-      style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        rotateX,
-        rotateY,
-        perspective: 1000,
-        transformStyle: "preserve-3d",
-      }}
-      whileHover={{
-        scale: 1.02,
-        border: "1px solid rgba(0,212,255,0.3)",
-        boxShadow: "0 8px 32px rgba(0,212,255,0.08)",
-        transition: { duration: 0.2 },
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Header */}
-      <div className="flex items-center gap-3">
-        <span
-          className="text-lg font-mono"
-          style={{ color: "#00d4ff" }}
-        >
-          {category.icon}
-        </span>
-        <span className="font-semibold text-sm tracking-wide" style={{ color: "rgba(255,255,255,0.9)" }}>
-          {category.name}
-        </span>
+    <div className="relative mt-12 overflow-hidden py-4 select-none">
+      {/* Marquee Row */}
+      <div className="flex w-max animate-marquee gap-3">
+        {doubledSkills.map((s, idx) => {
+          const Icon = s.Icon;
+          return (
+            <div
+              key={idx}
+              className="glass-soft flex shrink-0 items-center gap-2.5 rounded-full px-5 py-3 border border-white/5"
+            >
+              <Icon className="text-xl" style={{ color: s.color }} />
+              <span className="text-sm font-medium text-ink">{s.name}</span>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Chips */}
-      <div className="flex flex-wrap gap-2">
-        {category.skills.map((skill) => (
-          <motion.span
-            key={skill}
-            className="px-2.5 py-1 rounded-full text-xs cursor-default"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              color: "rgba(255,255,255,0.7)",
-            }}
-            whileHover={{
-              background: "rgba(0,212,255,0.08)",
-              border: "1px solid rgba(0,212,255,0.6)",
-              color: "rgba(255,255,255,1)",
-              scale: 1.04,
-              transition: { duration: 0.15 },
-            }}
-          >
-            {skill}
-          </motion.span>
-        ))}
-      </div>
-    </motion.div>
+      {/* Side Fade Overlays */}
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-24"
+        style={{ background: "linear-gradient(90deg, #04070a, transparent)" }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-24"
+        style={{ background: "linear-gradient(270deg, #04070a, transparent)" }}
+      />
+    </div>
   );
 }
 
 export function Skills() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".skill-card",
-        { opacity: 0, scale: 0.95 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.35,
-          stagger: 0.05,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".skills-grid",
-            start: "top 85%",
-            once: true,
-          },
-        }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="skills" ref={sectionRef} className="relative py-28 lg:py-36">
-      {/* Background glow */}
-      <div className="absolute right-0 top-1/3 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(168,85,247,0.05) 0%, transparent 70%)", filter: "blur(100px)" }} />
+    <section id="skills" className="px-4 py-24 sm:px-6 relative overflow-hidden">
+      {/* Ambient Light */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "30%",
+          right: "5%",
+          width: 400,
+          height: 400,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(168,85,247,0.04) 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
 
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Label */}
-        <p className="text-xs font-mono tracking-[0.15em] uppercase mb-4" style={{ color: "#00d4ff" }}>
-          // Skills &amp; Technologies
-        </p>
+      <div className="mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <span className="section-eyebrow">// Skills &amp; Toolkit</span>
+            <h2 className="text-4xl lg:text-5xl font-bold mt-4 text-ink display italic">
+              What I build with
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              From training deep learning models in Python to shipping MERN applications and writing low-level filesystem systems in C — here&apos;s the stack I reach for.
+            </p>
+          </div>
+          <span className="chip">
+            {MARQUEE_SKILLS.length} core stacks
+          </span>
+        </div>
 
-        {/* Heading */}
-        <h2 className="text-4xl lg:text-5xl font-bold mb-4" style={{ color: "rgba(255,255,255,0.95)" }}>
-          What I build with.
-        </h2>
+        {/* Marquee Banner */}
+        <SkillsMarquee />
 
-        <p className="text-base mb-16 max-w-xl" style={{ color: "rgba(255,255,255,0.45)" }}>
-          A curated toolkit refined across 13+ projects, academic coursework, and real-world deployments.
-        </p>
+        {/* Categories Grid */}
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {skillCategories.map((category, index) => {
+            const Icon = CATEGORY_ICONS[category.id] || Code2;
+            return (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="card-hover glass h-full rounded-3xl p-6"
+              >
+                {/* Icon & Category Name */}
+                <div className="flex items-center gap-3">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="text-base font-semibold text-ink">
+                    {category.name}
+                  </h3>
+                </div>
 
-        {/* Grid */}
-        <div className="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skillCategories.map((cat, i) => (
-            <SkillCard key={cat.id} category={cat} index={i} />
-          ))}
+                {/* Sub-tags */}
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="chip text-xs hover:border-accent/40 transition-colors cursor-default"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

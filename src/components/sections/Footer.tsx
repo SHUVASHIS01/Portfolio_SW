@@ -1,92 +1,135 @@
 "use client";
 
-import { BookOpen } from "lucide-react";
+import { Mail, ArrowUp, Milestone } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { featuredProjects } from "@/data/projects";
 
-const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+const SOCIAL_LINKS = [
+  { icon: FaGithub, label: "GitHub", href: "https://github.com/SHUVASHIS01" },
+  { icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/shuvashis-basak-177425247/" },
+  { icon: Mail, label: "Email", href: "mailto:basakshuvashis@gmail.com" },
 ];
 
-const SOCIAL = [
-  { icon: FaGithub, href: "https://github.com/SHUVASHIS01", label: "GitHub" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/shuvashis-basak-177425247/", label: "LinkedIn" },
-  { icon: BookOpen, href: "https://hashnode.com/@SHUVASHIS01", label: "Hashnode" },
+const NAV_LINKS = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "journey", label: "Journey" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function Footer() {
-  const handleNav = (href: string) => {
-    const id = href.replace("#", "");
+  const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <footer className="relative pt-8 pb-8">
-      {/* Divider */}
-      <div className="w-full h-px mb-10" style={{ background: "rgba(255,255,255,0.07)" }} />
-
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Three columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-8">
-          {/* Left: Monogram */}
-          <div className="flex flex-col gap-1 items-center md:items-start">
-            <span
-              className="text-2xl font-bold font-mono"
-              style={{ background: "linear-gradient(135deg, #00d4ff, #a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
-            >
-              SB
-            </span>
-            <span className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>Shuvashis Basak</span>
-          </div>
-
-          {/* Center: Nav links */}
-          <div className="flex flex-wrap justify-center gap-4">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.label}
-                onClick={() => handleNav(link.href)}
-                className="text-sm transition-colors duration-200 hover:text-white"
-                style={{ color: "rgba(255,255,255,0.4)" }}
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Right: Socials */}
-          <div className="flex justify-center md:justify-end gap-3">
-            {SOCIAL.map((s) => {
+    <footer className="relative mt-20 overflow-hidden">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        
+        {/* Main Glass Footer Frame */}
+        <div className="glass relative overflow-hidden rounded-t-[2rem] px-6 pb-10 pt-8 sm:px-10 border border-white/5 border-b-0">
+          
+          {/* Top Row: Social Pills */}
+          <div className="grid gap-3 sm:grid-cols-3">
+            {SOCIAL_LINKS.map((s, idx) => {
               const Icon = s.icon;
               return (
                 <a
-                  key={s.label}
+                  key={idx}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    color: "rgba(255,255,255,0.5)",
-                  }}
-                  aria-label={s.label}
+                  className="glass-soft flex items-center justify-center gap-3 rounded-xl px-4 py-3 text-sm text-ink transition-colors hover:border-accent/40 border border-white/5 cursor-pointer"
                 >
-                  <Icon size={14} />
+                  <Icon className="h-4 w-4 text-accent" />
+                  {s.label}
                 </a>
               );
             })}
           </div>
+
+          {/* Middle Row: Links Grid */}
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            
+            {/* Column 1: Info */}
+            <div>
+              <div className="display text-2xl text-accent-gradient font-bold select-none">
+                SB
+              </div>
+              <p className="mt-3 max-w-xs text-xs sm:text-sm text-muted leading-relaxed">
+                Shuvashis Basak — Computer Science student &amp; Full-Stack MERN developer from Dhaka, Bangladesh.
+              </p>
+            </div>
+
+            {/* Column 2: Navigation */}
+            <div>
+              <h4 className="text-sm font-semibold text-ink">Navigation</h4>
+              <ul className="mt-3 space-y-2 text-xs sm:text-sm text-muted">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.id}>
+                    <button
+                      onClick={() => scrollTo(link.id)}
+                      className="text-left transition-colors hover:text-accent cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Work */}
+            <div>
+              <h4 className="text-sm font-semibold text-ink">Projects</h4>
+              <ul className="mt-3 space-y-2 text-xs sm:text-sm text-muted">
+                {featuredProjects.slice(0, 4).map((p) => (
+                  <li key={p.id}>
+                    <button
+                      onClick={() => scrollTo("projects")}
+                      className="text-left transition-colors hover:text-accent cursor-pointer"
+                    >
+                      {p.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Reach Out */}
+            <div>
+              <h4 className="text-sm font-semibold text-ink">Get in touch</h4>
+              <p className="mt-3 text-xs sm:text-sm text-muted select-all">
+                basakshuvashis@gmail.com
+              </p>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="btn-ghost mt-4 py-2 px-4 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+              >
+                Back to top
+                <ArrowUp className="h-3.5 w-3.5" />
+              </button>
+            </div>
+
+          </div>
+
+          {/* Bottom Display Name */}
+          <div className="pointer-events-none mt-8 select-none text-center">
+            <div className="display text-[18vw] leading-none text-white/[0.03] uppercase tracking-wide">
+              SHUVASHIS
+            </div>
+          </div>
+
+          {/* Copyright Line */}
+          <div className="text-center mt-6 pt-6 border-t border-white/5">
+            <p className="text-[10px] sm:text-xs text-faint">
+              &copy; {new Date().getFullYear()} Shuvashis Basak. All rights reserved. Built with Next.js &amp; Tailwind.
+            </p>
+          </div>
+
         </div>
 
-        {/* Copyright */}
-        <div className="text-center" style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: "1.5rem" }}>
-          <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
-            © 2025 Shuvashis Basak · Built with Next.js &amp; ❤️
-          </p>
-        </div>
       </div>
     </footer>
   );
