@@ -74,20 +74,22 @@ code, pre, .font-mono {
 
 /* ── Particle drift animation ── */
 @keyframes particleDrift {
-  0% {
-    transform: translateY(0px);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-120px);
-    opacity: 0;
-  }
+  0%   { transform: translateY(0px);    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-120px); opacity: 0; }
+}
+
+/* ── Chevron bounce ── */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+/* ── Availability dot pulse ── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
 }
 
 /* ── Selection ── */
@@ -122,4 +124,9 @@ code, pre, .font-mono {
   @keyframes floatA { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-4px); } }
   @keyframes floatB { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
   @keyframes floatC { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-3px); } }
+
+  /* Hero two-column → single column on mobile */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
