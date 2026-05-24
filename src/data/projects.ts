@@ -75,6 +75,7 @@ export const gridProjects: Project[] = [
     liveUrl: "https://mango-books.vercel.app/",
     category: "Full Stack",
     gradient: "from-orange-400 to-amber-500",
+    screenshot: "/bookborrow.png",
   },
   {
     id: "healthconnect",
