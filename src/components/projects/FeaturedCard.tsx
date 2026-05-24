@@ -166,10 +166,10 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: isEven ? -80 : 80 }}
+      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
       ref={cardRef}
       className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 items-center"
       style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}

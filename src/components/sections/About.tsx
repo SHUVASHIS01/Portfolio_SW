@@ -23,11 +23,11 @@ function StatCounter({ value, suffix, label, isDecimal }: { value: number; suffi
     const obj = { val: 0 };
     gsap.to(obj, {
       val: value,
-      duration: 2,
+      duration: 1.2,
       ease: "power2.out",
       scrollTrigger: {
         trigger: el,
-        start: "top 80%",
+        start: "top 85%",
         once: true,
       },
       onUpdate: () => {
@@ -65,15 +65,15 @@ export function About() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".about-text-block",
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 24 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.7,
-          ease: "power3.out",
+          duration: 0.5,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".about-text-block",
-            start: "top 80%",
+            start: "top 85%",
             once: true,
           },
         }

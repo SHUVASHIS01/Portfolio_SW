@@ -31,13 +31,12 @@ function SkillCard({ category, index }: { category: typeof skillCategories[0]; i
     <motion.div
       className="skill-card rounded-2xl p-5 flex flex-col gap-4"
       style={{
-        background: "rgba(255,255,255,0.03)",
+        background: "rgba(255,255,255,0.04)",
         border: "1px solid rgba(255,255,255,0.08)",
         rotateX,
         rotateY,
         perspective: 1000,
         transformStyle: "preserve-3d",
-        willChange: "transform",
       }}
       whileHover={{
         scale: 1.02,
@@ -95,16 +94,16 @@ export function Skills() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".skill-card",
-        { opacity: 0, scale: 0.92 },
+        { opacity: 0, scale: 0.95 },
         {
           opacity: 1,
           scale: 1,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: "power3.out",
+          duration: 0.35,
+          stagger: 0.05,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".skills-grid",
-            start: "top 75%",
+            start: "top 85%",
             once: true,
           },
         }

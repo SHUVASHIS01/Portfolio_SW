@@ -41,15 +41,15 @@ export function Timeline() {
         const isLeft = el.classList.contains("timeline-left");
         gsap.fromTo(
           el,
-          { opacity: 0, x: isLeft ? -60 : 60 },
+          { opacity: 0, x: isLeft ? -40 : 40 },
           {
             opacity: 1,
             x: 0,
-            duration: 0.6,
-            ease: "power3.out",
+            duration: 0.4,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 85%",
+              start: "top 90%",
               once: true,
             },
           }

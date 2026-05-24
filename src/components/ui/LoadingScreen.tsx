@@ -14,7 +14,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    const duration = 1200;
+    const duration = 600;
     const interval = 16;
     const steps = duration / interval;
     let step = 0;

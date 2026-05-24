@@ -21,14 +21,14 @@ export function Hero() {
     const words = headingRef.current.querySelectorAll(".word");
     gsap.fromTo(
       words,
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        delay: 1.4,
+        duration: 0.4,
+        stagger: 0.06,
+        ease: "power2.out",
+        delay: 0.6,
       }
     );
   }, []);
@@ -51,7 +51,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
           >
             <span
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-widest"
@@ -83,7 +83,7 @@ export function Hero() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.8, duration: 0.6 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
             className="text-base lg:text-lg max-w-lg leading-relaxed"
             style={{ color: "rgba(255,255,255,0.55)" }}
           >
@@ -95,7 +95,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 0.5 }}
+            transition={{ delay: 1.0, duration: 0.4 }}
             className="flex flex-wrap gap-3 mt-2"
           >
             <a
@@ -125,7 +125,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.0, duration: 0.8, ease: "easeOut" }}
+          transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
           className="relative z-10 flex flex-col items-center gap-6"
         >
           {/* Avatar + floating cards container */}

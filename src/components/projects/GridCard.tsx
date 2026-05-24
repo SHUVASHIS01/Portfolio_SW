@@ -33,7 +33,7 @@ export function GridCard({ project, index }: GridCardProps) {
       onMouseMove={handleMouseMove}
       className="relative group rounded-2xl p-5 flex flex-col gap-4 overflow-hidden cursor-none"
       style={{
-        background: "rgba(255,255,255,0.03)",
+        background: "rgba(255,255,255,0.04)",
         border: "1px solid rgba(255,255,255,0.08)",
       }}
     >
