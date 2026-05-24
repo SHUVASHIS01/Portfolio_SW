@@ -96,7 +96,7 @@ export const timelineEntries: TimelineEntry[] = [
     tag: "Education",
     tagColor: "cyan",
     description:
-      "Started the Bachelor of Science in Computer Science & Engineering at BRAC University, Dhaka. Current CGPA: 3.61 / 4.00. Expected graduation: 2026.",
+      "Started the Bachelor of Science in Computer Science & Engineering at BRAC University, Dhaka. Current CGPA: 3.60 / 4.00. Expected graduation: 2026.",
   },
   {
     id: "origins",

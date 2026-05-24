@@ -62,10 +62,10 @@ export function About() {
             <div className="mt-4 grid grid-cols-2 gap-3">
               {FACTS.map((fact) => (
                 <div key={fact.label} className="glass-soft rounded-2xl px-4 py-3 select-none">
-                  <div className="text-[0.7rem] uppercase tracking-wide text-faint font-semibold">
+                  <div className="text-[0.7rem] uppercase tracking-wide text-slate-400 font-semibold">
                     {fact.label}
                   </div>
-                  <div className="mt-0.5 font-semibold text-ink text-sm sm:text-base">
+                  <div className="mt-0.5 font-semibold text-white text-sm sm:text-base">
                     {fact.value}
                   </div>
                 </div>
@@ -83,11 +83,11 @@ export function About() {
             <div className="space-y-5 text-base sm:text-[1.05rem] leading-relaxed text-muted">
               <p>
                 My journey into code started with a simple question every builder asks —{" "}
-                <span className="text-ink font-medium">&quot;how does this actually work?&quot;</span> That curiosity pulled me from breaking apart small programs to architecting full-stack applications, and eventually into deep learning and systems engineering.
+                <span className="text-white font-medium">&quot;how does this actually work?&quot;</span> That curiosity pulled me from breaking apart small programs to architecting full-stack applications, and eventually into deep learning and systems engineering.
               </p>
               <p>
                 Today I&apos;m a Computer Science student at{" "}
-                <span className="text-ink font-medium">BRAC University</span> (graduating 2026, GPA 3.61). I love the full arc of building software: crafting clean React frontends, designing secure Express backends with MongoDB, training PyTorch neural networks for medical imaging, or writing low-level file systems in C.
+                <span className="text-white font-medium">BRAC University</span> (graduating 2026, GPA 3.60). I love the full arc of building software: crafting clean React frontends, designing secure Express backends with MongoDB, training PyTorch neural networks for medical imaging, or writing low-level file systems in C.
               </p>
               <p>
                 What excites me most is coding projects that bridge complex algorithms with polished, real-world utility. Outside of coding, I write technical articles on Hashnode, earned the Duke of Edinburgh Award, and was selected for the global Aspire Leaders Program alongside peers from 180+ countries.
@@ -109,8 +109,8 @@ export function About() {
                       <span className="grid h-11 w-11 place-items-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
                         <Icon className="h-5 w-5" />
                       </span>
-                      <h4 className="mt-4 font-semibold text-ink text-sm sm:text-base">{s.title}</h4>
-                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted">{s.desc}</p>
+                      <h4 className="mt-4 font-semibold text-white text-sm sm:text-base">{s.title}</h4>
+                      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-300">{s.desc}</p>
                     </div>
                   </div>
                 );

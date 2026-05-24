@@ -77,10 +77,10 @@ export function Hero() {
 
             {/* Sub-line description */}
             <motion.div variants={itemVariants}>
-              <p className="max-w-xl text-base sm:text-lg leading-relaxed text-muted">
+              <p className="max-w-xl text-base sm:text-lg leading-relaxed text-slate-300">
                 Full-stack developer &amp; Computer Science student at{" "}
-                <span className="text-ink font-medium">BRAC University</span> — GPA{" "}
-                <span className="text-accent font-semibold">3.61</span>, graduating 2026.
+                <span className="text-white font-medium">BRAC University</span> — GPA{" "}
+                <span className="text-accent font-semibold">3.60</span>, graduating 2026.
                 I ship real products with MERN, deep learning, and systems code.
               </p>
             </motion.div>
@@ -88,10 +88,9 @@ export function Hero() {
             {/* Action CTAs */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mt-2">
               <a
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
+                href="/cv.pdf"
+                download="Shuvashis_Basak_CV.pdf"
+                className="btn-primary cursor-pointer"
               >
                 Download CV
                 <ArrowRight className="h-4 w-4" />
@@ -112,12 +111,12 @@ export function Hero() {
             <motion.div variants={itemVariants} className="flex gap-10 mt-4 border-t border-white/5 pt-6">
               {[
                 { value: "13+", label: "Projects Shipped" },
-                { value: "3.61", label: "CGPA @ BRAC" },
+                { value: "3.60", label: "CGPA @ BRAC" },
                 { value: "MERN", label: "Primary Stack" },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col gap-1">
                   <span className="display text-2xl text-accent-gradient font-bold">{s.value}</span>
-                  <span className="text-xs uppercase tracking-wider text-faint font-medium">
+                  <span className="text-xs uppercase tracking-wider text-slate-400 font-medium">
                     {s.label}
                   </span>
                 </div>
@@ -159,7 +158,7 @@ export function Hero() {
                   />
                   {/* Bottom info strip */}
                   <div className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-4 py-2.5 backdrop-blur">
-                    <span className="text-sm font-semibold text-ink">Shuvashis Basak</span>
+                    <span className="text-sm font-semibold text-white">Shuvashis Basak</span>
                     <span className="text-xs text-accent">MERN · AI · Systems</span>
                   </div>
                 </div>
@@ -167,8 +166,8 @@ export function Hero() {
 
               {/* Floating Stat Badge Left */}
               <div className="animate-floaty glass absolute -left-6 top-10 hidden sm:block rounded-2xl px-4 py-3 select-none">
-                <div className="text-2xl font-bold text-ink">13+</div>
-                <div className="text-[0.7rem] text-muted font-medium">Projects Shipped</div>
+                <div className="text-2xl font-bold text-white">13+</div>
+                <div className="text-[0.7rem] text-slate-300 font-medium">Projects Shipped</div>
               </div>
 
               {/* Floating Stat Badge Right */}
@@ -176,11 +175,11 @@ export function Hero() {
                 className="animate-floaty glass absolute -right-6 bottom-20 hidden sm:block rounded-2xl px-4 py-3 select-none"
                 style={{ animationDelay: "-3s" }}
               >
-                <div className="flex items-center gap-1.5 text-sm font-semibold text-ink">
+                <div className="flex items-center gap-1.5 text-sm font-semibold text-white">
                   <MapPin className="h-3.5 w-3.5 text-accent" />
                   Dhaka, BD
                 </div>
-                <div className="text-[0.7rem] text-muted font-medium mt-0.5">CS @ BRAC University</div>
+                <div className="text-[0.7rem] text-slate-300 font-medium mt-0.5">CS @ BRAC University</div>
               </div>
             </div>
 

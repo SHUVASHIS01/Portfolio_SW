@@ -1,14 +1,8 @@
 "use client";
 
-import { Mail, ArrowUp, Milestone } from "lucide-react";
+import { Mail, ArrowUpRight, ArrowUp } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { featuredProjects } from "@/data/projects";
-
-const SOCIAL_LINKS = [
-  { icon: FaGithub, label: "GitHub", href: "https://github.com/SHUVASHIS01" },
-  { icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/shuvashis-basak-177425247/" },
-  { icon: Mail, label: "Email", href: "mailto:basakshuvashis@gmail.com" },
-];
+import { SiHashnode } from "react-icons/si";
 
 const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -25,112 +19,102 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative mt-20 overflow-hidden">
+    <footer className="relative mt-32 overflow-hidden bg-base pt-20">
+      {/* Top Border Glow */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         
-        {/* Main Glass Footer Frame */}
-        <div className="glass relative overflow-hidden rounded-t-[2rem] px-6 pb-10 pt-8 sm:px-10 border border-white/5 border-b-0">
+        {/* Massive Call To Action */}
+        <div className="flex flex-col items-center text-center mb-24">
+          <span className="section-eyebrow mb-6">// What's next?</span>
+          <h2 className="display text-[12vw] sm:text-[8vw] md:text-[6rem] leading-[0.9] font-bold text-white tracking-tighter">
+            Let&apos;s build <br className="hidden sm:block" />
+            <span className="text-accent-gradient italic">together.</span>
+          </h2>
+          <a
+            href="mailto:basakshuvashis@gmail.com"
+            className="mt-10 group relative inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-base font-bold text-black transition-transform hover:scale-105"
+          >
+            Start a Conversation
+            <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </a>
+        </div>
+
+        {/* Info Grid */}
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 pb-16 border-t border-white/5 pt-16">
           
-          {/* Top Row: Social Pills */}
-          <div className="grid gap-3 sm:grid-cols-3">
-            {SOCIAL_LINKS.map((s, idx) => {
-              const Icon = s.icon;
-              return (
-                <a
-                  key={idx}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-soft flex items-center justify-center gap-3 rounded-xl px-4 py-3 text-sm text-ink transition-colors hover:border-accent/40 border border-white/5 cursor-pointer"
-                >
-                  <Icon className="h-4 w-4 text-accent" />
-                  {s.label}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Middle Row: Links Grid */}
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            
-            {/* Column 1: Info */}
-            <div>
-              <div className="display text-2xl text-accent-gradient font-bold select-none">
-                SB
+          {/* Brand Col */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="relative grid h-10 w-10 place-items-center rounded-xl bg-base select-none border border-white/10">
+                <span className="display text-lg text-accent-gradient font-bold">SB</span>
+              </span>
+              <div>
+                <span className="block text-base font-semibold text-white leading-none">Shuvashis Basak</span>
+                <span className="block text-[11px] text-slate-400 mt-1.5 uppercase tracking-wider">MERN · AI · Systems</span>
               </div>
-              <p className="mt-3 max-w-xs text-xs sm:text-sm text-muted leading-relaxed">
-                Shuvashis Basak — Computer Science student &amp; Full-Stack MERN developer from Dhaka, Bangladesh.
-              </p>
             </div>
-
-            {/* Column 2: Navigation */}
-            <div>
-              <h4 className="text-sm font-semibold text-ink">Navigation</h4>
-              <ul className="mt-3 space-y-2 text-xs sm:text-sm text-muted">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.id}>
-                    <button
-                      onClick={() => scrollTo(link.id)}
-                      className="text-left transition-colors hover:text-accent cursor-pointer"
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 3: Work */}
-            <div>
-              <h4 className="text-sm font-semibold text-ink">Projects</h4>
-              <ul className="mt-3 space-y-2 text-xs sm:text-sm text-muted">
-                {featuredProjects.slice(0, 4).map((p) => (
-                  <li key={p.id}>
-                    <button
-                      onClick={() => scrollTo("projects")}
-                      className="text-left transition-colors hover:text-accent cursor-pointer"
-                    >
-                      {p.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Column 4: Reach Out */}
-            <div>
-              <h4 className="text-sm font-semibold text-ink">Get in touch</h4>
-              <p className="mt-3 text-xs sm:text-sm text-muted select-all">
-                basakshuvashis@gmail.com
-              </p>
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="btn-ghost mt-4 py-2 px-4 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
-              >
-                Back to top
-                <ArrowUp className="h-3.5 w-3.5" />
-              </button>
-            </div>
-
-          </div>
-
-          {/* Bottom Display Name */}
-          <div className="pointer-events-none mt-8 select-none text-center">
-            <div className="display text-[18vw] leading-none text-white/[0.03] uppercase tracking-wide">
-              SHUVASHIS
-            </div>
-          </div>
-
-          {/* Copyright Line */}
-          <div className="text-center mt-6 pt-6 border-t border-white/5">
-            <p className="text-[10px] sm:text-xs text-faint">
-              &copy; {new Date().getFullYear()} Shuvashis Basak. All rights reserved. Built with Next.js &amp; Tailwind.
+            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+              Computer Science student at BRAC University. Building scalable web applications, fine-tuning neural networks, and writing low-level system code.
             </p>
+          </div>
+
+          {/* Links Col */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Navigation</h4>
+            <ul className="flex flex-col gap-3">
+              {NAV_LINKS.map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() => scrollTo(link.id)}
+                    className="text-sm font-medium text-slate-400 hover:text-accent transition-colors cursor-pointer"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Socials Col */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Connect</h4>
+            <div className="flex gap-3">
+              <a href="https://github.com/SHUVASHIS01" target="_blank" rel="noopener noreferrer" className="icon-btn h-10 w-10">
+                <FaGithub className="h-4.5 w-4.5" />
+              </a>
+              <a href="https://www.linkedin.com/in/shuvashis-basak-177425247/" target="_blank" rel="noopener noreferrer" className="icon-btn h-10 w-10">
+                <FaLinkedin className="h-4.5 w-4.5" />
+              </a>
+              <a href="https://hashnode.com/@SHUVASHIS01" target="_blank" rel="noopener noreferrer" className="icon-btn h-10 w-10">
+                <SiHashnode className="h-4.5 w-4.5" />
+              </a>
+            </div>
           </div>
 
         </div>
 
       </div>
+
+      {/* Massive Bottom Text Watermark & Copyright */}
+      <div className="relative border-t border-white/5 bg-black/20 overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none overflow-hidden">
+           <span className="display font-extrabold text-[24vw] whitespace-nowrap">SHUVASHIS</span>
+        </div>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 py-8">
+          <p className="text-xs font-medium text-slate-400">
+            &copy; {new Date().getFullYear()} Shuvashis Basak. All rights reserved.
+          </p>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+          >
+            Back to top <ArrowUp className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
     </footer>
   );
 }
+

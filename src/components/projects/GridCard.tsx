@@ -54,15 +54,15 @@ export function GridCard({ project, index }: GridCardProps) {
       </div>
 
       {/* Actions Row */}
-      <div className="flex items-center gap-3 mt-5 pt-3 border-t border-white/5">
+      <div className="flex flex-wrap items-center gap-3 mt-5 pt-3 border-t border-white/5 select-none">
         {project.liveUrl && (
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-xs font-semibold text-accent hover:underline transition-all cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-semibold text-accent bg-accent/10 border border-accent/25 px-2.5 py-1.5 rounded-xl hover:bg-accent/20 transition-all cursor-pointer"
           >
-            <ExternalLink className="h-3 w-3" />
+            <ExternalLink className="h-3.5 w-3.5" />
             Live Demo
           </a>
         )}
@@ -70,10 +70,12 @@ export function GridCard({ project, index }: GridCardProps) {
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 text-xs font-medium text-muted hover:text-ink transition-all cursor-pointer ml-auto"
+          className={`flex items-center gap-1.5 text-xs font-semibold text-ink bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-all cursor-pointer ${
+            project.liveUrl ? "" : "w-full justify-center"
+          }`}
         >
-          <FaGithub className="h-3 w-3" />
-          Code
+          <FaGithub className="h-3.5 w-3.5" />
+          GitHub
         </a>
       </div>
     </motion.div>

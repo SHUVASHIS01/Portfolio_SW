@@ -9,8 +9,8 @@
 
   --color-base: #04070a;
   --color-ink: #e9eef5;
-  --color-muted: #94a3b3;
-  --color-faint: #5b6b7c;
+  --color-muted: #cbd5e1; /* Made brighter for contrast */
+  --color-faint: #94a3b8; /* Made brighter for contrast */
   --color-accent: #22d3ee;
 }
 

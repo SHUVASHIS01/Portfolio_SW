@@ -55,7 +55,7 @@ export function HeroCodeBlock() {
           <span style={{ color: "rgba(255,255,255,0.5)" }}>{"  "}&quot;</span>
           <span style={{ color: "rgba(255,255,255,0.9)" }}>gpa</span>
           <span style={{ color: "rgba(255,255,255,0.5)" }}>&quot;: </span>
-          <span style={{ color: "#a855f7" }}>3.61</span>
+          <span style={{ color: "#a855f7" }}>3.60</span>
           <span style={{ color: "rgba(255,255,255,0.5)" }}>,</span>
         </span>
 

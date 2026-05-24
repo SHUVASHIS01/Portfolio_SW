@@ -53,7 +53,7 @@ export function HeroFloatingCards() {
           }}
         >
           <span>🎓</span>
-          <span>BRAC University · 3.61 GPA</span>
+          <span>BRAC University · 3.60 GPA</span>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shuvashis Basak — Full-Stack Developer & CS Student",
   description:
-    "Portfolio of Shuvashis Basak — CS student at BRAC University (GPA 3.61), full-stack developer specialising in MERN stack, deep learning, and systems programming. Open to full-time roles, internships, and freelance projects.",
+    "Portfolio of Shuvashis Basak — CS student at BRAC University (GPA 3.60), full-stack developer specialising in MERN stack, deep learning, and systems programming. Open to full-time roles, internships, and freelance projects.",
   keywords: [
     "Shuvashis Basak",
     "Full Stack Developer",
@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Shuvashis Basak" }],
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "Shuvashis Basak — Full-Stack Developer",
     description: "CS student at BRAC University building real products with MERN, deep learning, and systems code.",
