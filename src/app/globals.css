@@ -14,6 +14,13 @@
   --color-accent: #22d3ee;
 }
 
+/* ── Explicit Text Colors (Fix for Tailwind v4 theming/cache issues) ── */
+.text-ink { color: var(--color-ink) !important; }
+.text-muted { color: var(--color-muted) !important; }
+.text-faint { color: var(--color-faint) !important; }
+.text-white { color: #ffffff !important; }
+
+
 /* ── Reset & Base Styles ── */
 * {
   border-color: rgba(255, 255, 255, 0.08);
