@@ -23,24 +23,6 @@ export function GridCard({ project, index }: GridCardProps) {
       transition={{ duration: 0.5, delay: (index % 3) * 0.05 }}
       className="card-hover glass h-full rounded-2xl flex flex-col overflow-hidden"
     >
-      {/* Visual Header (Screenshot or Gradient Fallback) */}
-      <div className="relative h-40 w-full shrink-0 border-b border-white/10 overflow-hidden">
-        {project.screenshot ? (
-          <Image
-            src={project.screenshot}
-            alt={project.name}
-            fill
-            className="object-cover object-top transition-transform duration-500 hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))" }}>
-            <div className="absolute inset-0 bg-gradient-to-br opacity-40 mix-blend-overlay" style={{ backgroundImage: `linear-gradient(to bottom right, var(--tw-gradient-stops))` }} />
-            <span className="text-[#e9eef5]/30 font-bold text-xl tracking-wider select-none">{project.name}</span>
-          </div>
-        )}
-      </div>
-
       <div className="p-6 flex flex-col justify-between flex-1">
         <div className="flex flex-col gap-4">
           {/* Top bar: Name and Category */}
