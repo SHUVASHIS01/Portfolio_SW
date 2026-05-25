@@ -8,7 +8,7 @@ import { timelineEntries } from "@/data/timeline";
 gsap.registerPlugin(ScrollTrigger);
 
 const TAG_COLORS: Record<string, string> = {
-  cyan: "rgba(0,212,255,0.15)",
+  cyan: "rgba(250,204,21,0.15)",
   amber: "rgba(251,191,36,0.15)",
   purple: "rgba(168,85,247,0.15)",
   slate: "rgba(148,163,184,0.15)",
@@ -20,7 +20,7 @@ const TAG_COLORS: Record<string, string> = {
 };
 
 const TAG_TEXT: Record<string, string> = {
-  cyan: "#00d4ff",
+  cyan: "#facc15",
   amber: "#fbbf24",
   purple: "#a855f7",
   slate: "#94a3b8",
@@ -63,11 +63,11 @@ export function Timeline() {
     <section id="journey" ref={sectionRef} className="relative py-28 lg:py-36">
       {/* Glow */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)", filter: "blur(80px)" }} />
+        style={{ background: "radial-gradient(circle, rgba(250,204,21,0.04) 0%, transparent 70%)", filter: "blur(80px)" }} />
 
       <div className="container mx-auto px-6 lg:px-12">
         {/* Label */}
-        <p className="text-xs font-mono tracking-[0.15em] uppercase mb-4" style={{ color: "#00d4ff" }}>
+        <p className="text-xs font-mono tracking-[0.15em] uppercase mb-4" style={{ color: "#facc15" }}>
           // Experience &amp; Journey
         </p>
 
@@ -98,8 +98,8 @@ export function Timeline() {
                   <div
                     className="absolute left-4 lg:left-1/2 top-6 w-3 h-3 rounded-full -translate-x-1/2 z-10"
                     style={{
-                      background: "#00d4ff",
-                      boxShadow: "0 0 12px rgba(0,212,255,0.5)",
+                      background: "#facc15",
+                      boxShadow: "0 0 12px rgba(250,204,21,0.5)",
                     }}
                   />
 

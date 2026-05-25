@@ -8,9 +8,9 @@ import Image from "next/image";
 import { Project } from "@/data/projects";
 
 const GRADIENTS: Record<string, string> = {
-  mediqueue: "linear-gradient(135deg, #00d4ff 0%, #00b4d8 100%)",
-  jobportal: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-  developerlook: "linear-gradient(135deg, #10b981 0%, #00d4ff 100%)",
+  mediqueue: "linear-gradient(135deg, #facc15 0%, #eab308 100%)",
+  jobportal: "linear-gradient(135deg, #fef08a 0%, #facc15 100%)",
+  developerlook: "linear-gradient(135deg, #eab308 0%, #ca8a04 100%)",
 };
 
 interface FeaturedCardProps {
@@ -42,19 +42,21 @@ export function FeaturedCard({ project, index }: FeaturedCardProps) {
   };
 
   const num = String(index + 1).padStart(2, "0");
-  const gradient = GRADIENTS[project.id] || "linear-gradient(135deg, #00d4ff, #a855f7)";
+  const gradient = GRADIENTS[project.id] || "linear-gradient(135deg, #facc15, #eab308)";
 
   const TextSide = (
     <div className="flex flex-col gap-5 py-2">
-      {/* Index Number */}
-      <div className="relative">
-        <span className="absolute -top-8 -left-2 display font-extrabold select-none pointer-events-none text-faint opacity-[0.06] text-7xl sm:text-8xl">
+      {/* Index Number & Title */}
+      <div className="flex items-start gap-4 sm:gap-5">
+        <span className="display font-extrabold text-accent opacity-50 text-5xl sm:text-6xl leading-none mt-1">
           {num}
         </span>
-        <span className="chip mb-2 text-xs">{project.category}</span>
-        <h3 className="relative text-2xl sm:text-3xl font-bold z-10 text-ink leading-tight">
-          {project.name}
-        </h3>
+        <div className="flex flex-col">
+          <span className="chip mb-2 text-xs self-start">{project.category}</span>
+          <h3 className="text-2xl sm:text-3xl font-bold text-ink leading-tight">
+            {project.name}
+          </h3>
+        </div>
       </div>
 
       {/* Description */}
