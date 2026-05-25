@@ -4,9 +4,9 @@
 /* ── Core Variables ── */
 :root {
   --color-base: #0c0b09;
-  --color-ink: #fef9c3;
-  --color-muted: #d4d4d8;
-  --color-faint: #a1a1aa;
+  --color-ink: #ffffff;
+  --color-muted: #ffffff;
+  --color-faint: #ffffff;
   --color-accent: #facc15;
 }
 
