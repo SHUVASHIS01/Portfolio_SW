@@ -36,7 +36,7 @@ export function GridCard({ project, index }: GridCardProps) {
         ) : (
           <div className="absolute inset-0 flex items-center justify-center" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))" }}>
             <div className="absolute inset-0 bg-gradient-to-br opacity-40 mix-blend-overlay" style={{ backgroundImage: `linear-gradient(to bottom right, var(--tw-gradient-stops))` }} />
-            <span className="text-white/30 font-bold text-xl tracking-wider select-none">{project.name}</span>
+            <span className="text-[#e9eef5]/30 font-bold text-xl tracking-wider select-none">{project.name}</span>
           </div>
         )}
       </div>
@@ -45,7 +45,7 @@ export function GridCard({ project, index }: GridCardProps) {
         <div className="flex flex-col gap-4">
           {/* Top bar: Name and Category */}
           <div className="flex items-start justify-between gap-3">
-            <h3 className="font-semibold text-white text-sm sm:text-base leading-snug">
+            <h3 className="font-semibold text-[#e9eef5] text-sm sm:text-base leading-snug">
               {project.name}
             </h3>
             <span className="chip shrink-0 text-[10px] px-2 py-0.5 whitespace-nowrap border-white/20">
@@ -54,19 +54,19 @@ export function GridCard({ project, index }: GridCardProps) {
           </div>
 
           {/* Description */}
-          <p className="text-xs sm:text-sm leading-relaxed text-slate-300 line-clamp-2">
+          <p className="text-xs sm:text-sm leading-relaxed text-[#cbd5e1] line-clamp-2">
             {project.description}
           </p>
 
           {/* Tech Chips */}
           <div className="flex flex-wrap gap-1.5 mt-1">
             {visibleStack.map((t) => (
-              <span key={t} className="chip text-[10px] px-2 py-0.5 bg-black/20 border-white/10 text-slate-300">
+              <span key={t} className="chip text-[10px] px-2 py-0.5 bg-black/20 border-white/10 text-[#cbd5e1]">
                 {t}
               </span>
             ))}
             {remainingCount > 0 && (
-              <span className="chip text-[10px] px-2 py-0.5 text-slate-400 bg-transparent border-transparent">
+              <span className="chip text-[10px] px-2 py-0.5 text-[#94a3b8] bg-transparent border-transparent">
                 +{remainingCount} more
               </span>
             )}
@@ -90,7 +90,7 @@ export function GridCard({ project, index }: GridCardProps) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-1.5 text-xs font-semibold text-white bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 text-xs font-semibold text-[#e9eef5] bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-all cursor-pointer ${
               project.liveUrl ? "" : "w-full justify-center"
             }`}
           >

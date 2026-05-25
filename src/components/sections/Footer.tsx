@@ -28,7 +28,7 @@ export function Footer() {
         {/* Massive Call To Action */}
         <div className="flex flex-col items-center text-center mb-24">
           <span className="section-eyebrow mb-6">// What's next?</span>
-          <h2 className="display text-[12vw] sm:text-[8vw] md:text-[6rem] leading-[0.9] font-bold text-white tracking-tighter">
+          <h2 className="display text-[12vw] sm:text-[8vw] md:text-[6rem] leading-[0.9] font-bold text-[#e9eef5] tracking-tighter">
             Let&apos;s build <br className="hidden sm:block" />
             <span className="text-accent-gradient italic">together.</span>
           </h2>
@@ -51,24 +51,24 @@ export function Footer() {
                 <span className="display text-lg text-accent-gradient font-bold">SB</span>
               </span>
               <div>
-                <span className="block text-base font-semibold text-white leading-none">Shuvashis Basak</span>
-                <span className="block text-[11px] text-slate-400 mt-1.5 uppercase tracking-wider">MERN · AI · Systems</span>
+                <span className="block text-base font-semibold text-[#e9eef5] leading-none">Shuvashis Basak</span>
+                <span className="block text-[11px] text-[#94a3b8] mt-1.5 uppercase tracking-wider">MERN · AI · Systems</span>
               </div>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-[#94a3b8] leading-relaxed max-w-sm">
               Computer Science student at BRAC University. Building scalable web applications, fine-tuning neural networks, and writing low-level system code.
             </p>
           </div>
 
           {/* Links Col */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Navigation</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#e9eef5] mb-6">Navigation</h4>
             <ul className="flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => scrollTo(link.id)}
-                    className="text-sm font-medium text-slate-400 hover:text-accent transition-colors cursor-pointer"
+                    className="text-sm font-medium text-[#94a3b8] hover:text-accent transition-colors cursor-pointer"
                   >
                     {link.label}
                   </button>
@@ -79,7 +79,7 @@ export function Footer() {
 
           {/* Socials Col */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-6">Connect</h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#e9eef5] mb-6">Connect</h4>
             <div className="flex gap-3">
               <a href="https://github.com/SHUVASHIS01" target="_blank" rel="noopener noreferrer" className="icon-btn h-10 w-10">
                 <FaGithub className="h-4.5 w-4.5" />
@@ -103,12 +103,12 @@ export function Footer() {
            <span className="display font-extrabold text-[24vw] whitespace-nowrap">SHUVASHIS</span>
         </div>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 py-8">
-          <p className="text-xs font-medium text-slate-400">
+          <p className="text-xs font-medium text-[#94a3b8]">
             &copy; {new Date().getFullYear()} Shuvashis Basak. All rights reserved.
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-2 text-xs font-semibold text-[#cbd5e1] hover:text-[#e9eef5] transition-colors cursor-pointer"
           >
             Back to top <ArrowUp className="h-4 w-4" />
           </button>
