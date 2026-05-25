@@ -26,12 +26,12 @@ export function CustomCursor() {
     };
 
     const onMouseEnterLink = () => {
-      gsap.to(ring, { scale: 1.8, borderColor: "rgba(0,212,255,0.8)", duration: 0.2 });
+      gsap.to(ring, { scale: 1.8, borderColor: "rgba(250,204,21,0.8)", duration: 0.2 });
       gsap.to(dot, { scale: 0.5, duration: 0.2 });
     };
 
     const onMouseLeaveLink = () => {
-      gsap.to(ring, { scale: 1, borderColor: "rgba(0,212,255,0.4)", duration: 0.2 });
+      gsap.to(ring, { scale: 1, borderColor: "rgba(250,204,21,0.4)", duration: 0.2 });
       gsap.to(dot, { scale: 1, duration: 0.2 });
     };
 
@@ -73,7 +73,7 @@ export function CustomCursor() {
       {/* Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 bg-cyan-400 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-screen hidden md:block"
+        className="fixed top-0 left-0 w-2 h-2 bg-yellow-400 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-screen hidden md:block"
         style={{ willChange: "transform" }}
       />
       {/* Ring */}
@@ -81,7 +81,7 @@ export function CustomCursor() {
         ref={ringRef}
         className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 hidden md:block"
         style={{
-          border: "1px solid rgba(0,212,255,0.4)",
+          border: "1px solid rgba(250,204,21,0.4)",
           willChange: "transform",
         }}
       />

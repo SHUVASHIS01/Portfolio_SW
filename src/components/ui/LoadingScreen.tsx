@@ -52,7 +52,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         >
           {/* Glow orbs */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-20"
-            style={{ background: "radial-gradient(circle, #00d4ff 0%, transparent 70%)", filter: "blur(80px)" }}
+            style={{ background: "radial-gradient(circle, #facc15 0%, transparent 70%)", filter: "blur(80px)" }}
           />
 
           {/* Monogram */}
@@ -64,7 +64,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           >
             {/* SB logo */}
             <div className="text-6xl font-bold font-mono"
-              style={{ background: "linear-gradient(135deg, #00d4ff, #a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              style={{ background: "linear-gradient(135deg, #facc15, #eab308)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               SB
             </div>
 
@@ -84,7 +84,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 className="absolute top-0 left-0 h-full"
                 style={{
                   width: `${progress}%`,
-                  background: "linear-gradient(90deg, #00d4ff, #a855f7)",
+                  background: "linear-gradient(90deg, #facc15, #eab308)",
                   transition: "width 16ms linear",
                 }}
               />
