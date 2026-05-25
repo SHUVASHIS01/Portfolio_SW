@@ -49,7 +49,7 @@ export function Contact() {
           width: 450,
           height: 450,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(34,211,238,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(250,204,21,0.03) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />

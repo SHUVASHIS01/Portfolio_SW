@@ -41,7 +41,7 @@ export function About() {
             <div
               className="absolute -inset-4 -z-10 rounded-[2.5rem] opacity-60 blur-2xl pointer-events-none"
               style={{
-                background: "radial-gradient(circle at 50% 40%, rgba(34,211,238,0.15), transparent 60%)",
+                background: "radial-gradient(circle at 50% 40%, rgba(250, 204, 21, 0.15), transparent 60%)",
               }}
             />
 

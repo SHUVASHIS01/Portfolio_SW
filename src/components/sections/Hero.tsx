@@ -32,7 +32,7 @@ export function Hero() {
           width: 500,
           height: 500,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(34,211,238,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(250, 204, 21, 0.06) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -44,7 +44,7 @@ export function Hero() {
           width: 450,
           height: 450,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(168,85,247,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(234, 88, 12, 0.05) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -134,7 +134,15 @@ export function Hero() {
               <div
                 className="animate-spin-slow absolute -inset-3 -z-10 rounded-[3rem] opacity-40"
                 style={{
-                  background: "conic-gradient(from 0deg, transparent, rgba(34,211,238,0.5), transparent 40%)",
+                  background: "conic-gradient(from 0deg, transparent, rgba(250, 204, 21, 0.5), transparent 40%)",
+                }}
+              />
+
+              {/* Ambient Glow */}
+              <div
+                className="animate-blob absolute -inset-10 -z-10 rounded-[3rem] opacity-50 mix-blend-screen blur-3xl"
+                style={{
+                  background: "radial-gradient(circle at center, rgba(250, 204, 21, 0.15) 0%, transparent 70%)",
                 }}
               />
 
